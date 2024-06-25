@@ -1,0 +1,24 @@
+For C++ testing:
+
+1) Compile the shared library
+g++ -O3 -Wall -shared -std=c++17 -fPIC $(python3.8 -m pybind11 --includes) my_cpp_module.cpp sensor_data.cpp -o my_cpp_module$(python3.8-config --extension-suffix)
+
+2) Compile the test executable
+g++ -std=c++17 -o runTests test_sensor_data.cpp sensor_data.cpp -lgtest -lgtest_main -pthread
+
+3) Run tests
+./runTests
+
+For Python testing:
+
+1) Run Flask application
+export FLASK_APP=app.py
+flask run
+
+2) Run python test (in another window terminal)
+pytest test_app.py
+
+For locust test:
+
+1) Run locustfile
+locust -f locustfile.py
